@@ -3,6 +3,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet';
 import 'proj4';
 import 'proj4leaflet';
+import 'leaflet/dist/leaflet.css';
 import styles from './index.css';
 import React, { PureComponent } from 'react';
 
