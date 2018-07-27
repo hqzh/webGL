@@ -4,7 +4,7 @@ import L from 'leaflet';
 import 'proj4';
 import 'proj4leaflet';
 import 'leaflet/dist/leaflet.css';
-import styles from './index.css';
+import styles from './index.less';
 import React, { PureComponent } from 'react';
 
 
@@ -31,7 +31,6 @@ class App extends PureComponent {
     });
 
     return (
-
         <Map
           crs={bdCrs}
           center={center}
@@ -46,7 +45,6 @@ class App extends PureComponent {
             url="http://online{s}.map.bdimg.com/tile/?qt=tile&x={x}&y={y}&z={z}&styles=pl&udt=20180201"
           />
         </Map>
-
     );
   }
 }

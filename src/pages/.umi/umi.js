@@ -38,6 +38,7 @@ if (module.hot) {
   });
 }
 
+require('C:/Users/Administrator/Desktop/webGL/src/global.less');
 // Enable service worker
 if (process.env.NODE_ENV === 'production') {
   require('./registerServiceWorker');
