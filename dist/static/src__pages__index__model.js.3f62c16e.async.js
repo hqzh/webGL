@@ -1,0 +1,1 @@
+webpackJsonp([6],{sO2r:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.default={namespace:"count",state:0,reducers:{increase:function(e){return e+1},decrease:function(e){return e-1}},subscriptions:{setup:function(e){var n=(e.dispatch,e.history);return n.listen(function(e){e.pathname,e.query;console.log(n)})}}}}});
