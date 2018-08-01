@@ -4,7 +4,8 @@
     "dev:test": "cross-env PORT=9090 WATCH_FILES=none BROWSER=none CLEAR_CONSOLE=none COMPILE_ON_DEMAND=none COVERAGE=true umi dev",
     "test": "macaca run -d ./test --verbose",
     "serve": "npm run dev:test &",
-    "ci": "npm run serve && npm test"
+    "ci": "npm run serve && npm test",
+    "commitmsg": "validate-commit-msg"
   },
   "dependencies": {
     "leaflet": "^1.3.3",
