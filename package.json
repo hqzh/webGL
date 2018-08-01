@@ -27,6 +27,7 @@
     "macaca-cli": "^2.1.2",
     "macaca-datahub": "^1.0.50",
     "macaca-electron": "2",
-    "macaca-wd": "*"
+    "macaca-wd": "*",
+    "validate-commit-msg": "^2.14.0"
   }
 }
