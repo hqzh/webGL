@@ -37,6 +37,11 @@ $ npm run dev:test
 $ npm run test
 ```
 
+ANALYZE.
+
+```bash
+$ ANALYZE=1 umi build
+```
 ## Reports
 
 <div align="center">
