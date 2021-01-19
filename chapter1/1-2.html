@@ -47,7 +47,7 @@
 			camera.position.z = 5; //相机距离场景，相机的作用就是面对场景，在场景中取一个合适的景，把它拍下来。渲染器的作用就是将相机拍摄下来的图片，放到浏览器中去显示。他们三者的关系如./img/desc.jpg所示
 			function render() {
 				// 让浏览器去执行一次参数中的函数，这样通过上面render中调用requestAnimationFrame()函数，requestAnimationFrame()函数又让rander()再执行一次，循环渲染
-				requestAnimationFrame(render);
+				requestAnimationFrame(render);  // requestAnimationFrame函数表示下一帧将执行render函数，不是马上执行render函数的意思。可放在任意一行
 				cube.rotation.x += 0.1;
 				cube.rotation.y += 0.1;
 				// render( scene, camera, renderTarget, forceClear )
