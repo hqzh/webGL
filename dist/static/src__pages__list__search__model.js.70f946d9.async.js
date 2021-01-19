@@ -1,1 +1,0 @@
-webpackJsonp([5],{xZsB:function(e,s,t){"use strict";Object.defineProperty(s,"__esModule",{value:!0}),s.default={namespace:"search",state:{title:"list-search-in-model"},reducers:{}}}});
