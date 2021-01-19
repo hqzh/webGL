@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>
+			html,
+			body {
+				padding: 0;
+				margin: 0;
+			}
+			canvas {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+		<script src="js/three.js"></script>
+	</head>
+	<body>
+		<script>
+			// 渲染必要三大件  场景（scene）、相机（camera）和渲染器（renderer）
+
+			var scene = new THREE.Scene(); //场景是所有物体的容器，如果要显示一个苹果，就需要将苹果对象加入场景中。
+
+			// 相机决定了场景中那个角度的景色会显示出来。相机就像人的眼睛一样，人站在不同位置，抬头或者低头都能够看到不同的景色。
+			// 场景只有一种，但是相机却又很多种。和现实中一样，不同的相机确定了呈相的各个方面。
+			// 比如有的相机适合人像，有的相机适合风景，专业的摄影师根据实际用途不一样，选择不同的相机。
+			// 对程序员来说，只要设置不同的相机参数，就能够让相机产生不一样的效果。
+			// PerspectiveCamera:透视相机
+			var camera = new THREE.PerspectiveCamera(
+				75,
+				window.innerWidth / window.innerHeight,
+				0.1,
+				1000
+			);
+
+			var renderer = new THREE.WebGLRenderer();
+
+			renderer.setSize(window.innerWidth, window.innerHeight); // 设置渲染器的大小为窗口的内宽高度，也就是内容区的宽高度
+			// renderer.domElement渲染器中的画布,所有的渲染都是画在domElement上的，所以这里的appendChild表示将这个domElement挂接在body下面，这样渲染的结果就能够在页面中显示了。
+			document.body.appendChild(renderer.domElement);
+			// CubeGeometry 几何立方体CubeGeometry(width, height, depth, segmentsWidth, segmentsHeight, segmentsDepth, materials, sides)
+			// width：立方体x轴的长度        height：立方体y轴的长度           depth：立方体z轴的深度，也就是长度
+			var geometry = new THREE.CubeGeometry(1, 1, 1);
+			var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+			var cube = new THREE.Mesh(geometry, material);
+			scene.add(cube);
+			camera.position.z = 5; //相机距离场景，相机的作用就是面对场景，在场景中取一个合适的景，把它拍下来。渲染器的作用就是将相机拍摄下来的图片，放到浏览器中去显示。他们三者的关系如./img/desc.jpg所示
+			function render() {
+				// 让浏览器去执行一次参数中的函数，这样通过上面render中调用requestAnimationFrame()函数，requestAnimationFrame()函数又让rander()再执行一次，循环渲染
+				requestAnimationFrame(render);
+				cube.rotation.x += 0.1;
+				cube.rotation.y += 0.1;
+				// render( scene, camera, renderTarget, forceClear )
+				// scene：前面定义的场景
+				// camera：前面定义的相机
+				// renderTarget：渲染的目标，默认是渲染到前面定义的render变量中
+				// forceClear：每次绘制之前都将画布的内容给清除，即使自动清除标志autoClear为false，也会清除。
+				renderer.render(scene, camera);
+			}
+			render();
+		</script>
+	</body>
+</html>
