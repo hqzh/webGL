@@ -19,6 +19,7 @@
             function initThree() {
                 width = document.getElementById('canvas-frame').clientWidth;
                 height = document.getElementById('canvas-frame').clientHeight;
+                // 坐标原点指定的是世界坐标，不是计算机的屏幕中心，与显示器无关。是我们脑海中的一个世界坐标，相机放在世界坐标中的一个位置。而相机的中心与世界坐标无关，相机只是世界坐标中一个特殊的物体而已
                 renderer = new THREE.WebGLRenderer({
                     antialias : true
                 });
@@ -30,13 +31,19 @@
             var camera;
             function initCamera() {
                 camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+                // 不用说也知道是相机的位置。如果吧人头比作相机，那么就是人头的中心的位置，(值越小，说明越往前看，可以new THREE.WebGLRenderer({antialias:true})减少锯齿，就像PS中的羽化效果一样)
                 camera.position.x = 0;
-                camera.position.y = 1000;
+                camera.position.y = 1300;
                 camera.position.z = 0;
+                // up是头顶的方向，大多数时候，是朝天空的。少部分时候，是朝床头的
                 camera.up.x = 0;
                 camera.up.y = 0;
                 camera.up.z = 1;
+                // lookat是眼睛，看的方向，或者说是眼睛的聚焦点，不要告诉我，你眼睛可以同时聚焦2个点。
+                // 结合up和position可以看出是人头向下看（up 和lookat这两个方向必须垂直，无论怎么设置，他们必须互相垂直。不然相机看到的结果无法预知。）
+                // 相机没有朝向的说法，只有lookat，就是它看到的那一个聚焦点，就像眼睛看到的聚焦点一样。
                 camera.lookAt(new THREE.Vector3(0, 0, 0));
+                // camera.lookAt(0, 0, 0);或者这样
             }
 
             var scene;
