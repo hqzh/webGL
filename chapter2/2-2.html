@@ -54,15 +54,16 @@
             var cube;
             function initObject() {
                 var geometry = new THREE.Geometry();
+                // 以下形成了一条x轴的线
                 geometry.vertices.push( new THREE.Vector3( - 500, 0, 0 ) );
                 geometry.vertices.push( new THREE.Vector3( 500, 0, 0 ) );
 
                 for ( var i = 0; i <= 20; i ++ ) {
-
+                    // 沿着z轴正方向平移
                     var line = new THREE.LineSegments( geometry, new THREE.LineBasicMaterial( { color: 0x000000, opacity: 1 } ) );
                     line.position.z = ( i * 50 ) - 500;
                     scene.add( line );
-
+                    // 先围绕y轴旋转90度，然后再复制20份，平行于z轴移动到不同的位置，也能形成一组平行线。
                     var line = new THREE.LineSegments( geometry, new THREE.LineBasicMaterial( { color: 0x000000, opacity: 1 } ) );
                     line.position.x = ( i * 50 ) - 500;
                     line.rotation.y = 90 * Math.PI / 180;
