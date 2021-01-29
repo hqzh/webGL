@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three框架</title>
+    <script src="../three.js"></script>
+    <style type="text/css">
+        div#canvas-frame {
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: 600px;
+            background-color: #EEEEEE;
+        }
+    </style>
+    <script>
+        var renderer;
+        function initThree() {
+            width = document.getElementById('canvas-frame').clientWidth;
+            height = document.getElementById('canvas-frame').clientHeight;
+            renderer = new THREE.WebGLRenderer({
+                antialias: true
+            });
+            renderer.setSize(width, height);
+            document.getElementById('canvas-frame').appendChild(renderer.domElement);
+            renderer.setClearColor(0xFFFFFF, 1.0);
+        }
+
+        var camera;
+        function initCamera() {
+            // PerspectiveCamera( fov, aspect, near, far )  配合PerspectiveCamera图片看
+            // 1、视角fov：这个最难理解,我的理解是,眼睛睁开的角度,即,视角的大小,如果设置为0,相当你闭上眼睛了,所以什么也看不到,如果为180,那么可以认为你的视界很广阔,但是在180度的时候，往往物体很小，因为他在你的整个可视区域中的比例变小了。
+            // 2、纵横比aspect：实际窗口的纵横比，即宽度除以高度。这个值越大，说明你宽度越大，那么你可能看的是宽银幕电影了，如果这个值小于1，那么可能你看到的是如下的图中的LED屏幕了。
+            // 3、近平面near：这个呢，表示你近处的裁面的距离。补充一下，也可以认为是眼睛距离近处的距离，假设为10米远，请不要设置为负值，Three.js就傻了,不知道怎么算了,
+            // 4、远平面far：这个呢，表示你远处的裁面,
+            camera = new THREE.PerspectiveCamera(45, width / height, 10, 1000);
+            // OrthographicCamera( left, right, top, bottom, near, far )   配合OrthographicCamera图片看
+            // 1、 left参数
+            // left：左平面距离相机中心点的垂直距离。从图中可以看出，左平面是屏幕里面的那个平面。
+            // 2、 right参数
+            // right：右平面距离相机中心点的垂直距离。从图中可以看出，右平面是屏幕稍微外面一点的那个平面。
+            // 3、 top参数
+            // top：顶平面距离相机中心点的垂直距离。上图中的顶平面，是长方体头朝天的平面。
+            // 4、 bottom参数
+            // bottom：底平面距离相机中心点的垂直距离。底平面是头朝地的平面。
+            // 5、near参数
+            // near：近平面距离相机中心点的垂直距离。近平面是左边竖着的那个平面。
+            // 6、far参数
+            // far：远平面距离相机中心点的垂直距离。远平面是右边竖着的那个平面。
+            // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 10, 1000 );
+            camera.position.x = 0;
+            camera.position.y = 0;
+            camera.position.z = 600;
+            camera.up.x = 0;
+            camera.up.y = 1;
+            camera.up.z = 0;
+            camera.lookAt(0, 0, 0);
+        }
+
+        var scene;
+        function initScene() {
+            scene = new THREE.Scene();
+        }
+
+        var light;
+        function initLight() {
+            light = new THREE.AmbientLight(0xFF0000);
+            light.position.set(100, 100, 200);
+            scene.add(light);
+
+            light = new THREE.PointLight(0x00FF00);
+            light.position.set(0, 0, 300);
+            scene.add(light);
+        }
+
+        var cube;
+        function initObject() {
+            var geometry = new THREE.CylinderGeometry(70, 100, 200,);
+            var material = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+            var mesh = new THREE.Mesh(geometry, material);
+            mesh.position = new THREE.Vector3(0, 0, 0);
+            scene.add(mesh);
+        }
+
+        function threeStart() {
+            initThree();
+            initCamera();
+            initScene();
+            initLight();
+            initObject();
+            animation();
+
+        }
+        function animation() {
+            changeFov();
+            renderer.render(scene, camera);
+            requestAnimationFrame(animation);
+        }
+
+        function setCameraFov(fov) {
+            camera.fov = fov;
+            camera.updateProjectionMatrix();
+        }
+
+        function changeFov() {
+            var txtFov = document.getElementById("txtFov").value;
+            var val = parseFloat(txtFov);
+            setCameraFov(val);
+        }
+    </script>
+</head>
+
+<body onload="threeStart();">
+    <div id="canvas-frame"></div>
+    <div>
+        Fov:<input type="text" value="45" id="txtFov" />(0到180的值)
+    </div>
+</body>
+
+</html>
