@@ -56,40 +56,51 @@
             light = new THREE.DirectionalLight(0xFF0000);
             light.position.set(0, 0, 1);
             scene.add(light);
+            // 点光源
+            // 点光源是理想化为质点的向四面八方发出光线的光源。点光源是抽象化了的物理概念，为了把物理问题的研究简单化。就像平时说的光滑平面，质点，无空气阻力一样，
+            // 点光源在现实中也是不存在的，指的是从一个点向周围空间均匀发光的光源。
+            // 点光源的特点是发光部分为一个小圆面，近似一个点
+            light = new THREE.PointLight(0x0000FF);
+            light.position.set(0, 0, 30);
+            scene.add(light);
         }
 
         // A start 
         var cube;
         function initObject() {
-            var geometry = new THREE.CubeGeometry(200, 100, 50, 4, 4);
+            // CubeGeometry 几何立方体CubeGeometry(width, height, depth, segmentsWidth, segmentsHeight, segmentsDepth, materials, sides)
+            // width：立方体x轴的长度        height：立方体y轴的长度           depth：立方体z轴的深度，也就是长度
+            // widthSegments：x方向上的分段数（可选，缺省值1）   heightSegments：y方向上的分段数（同上）  depthSegments：z方向上的分段数（同上）,
+            // 注意这个分段是对六个面进行分段，而不是对立方体的体素分段，因此在立方体的中间是不分段的，只有六个侧面被分段。 见同文件夹图
+            var geometry = new THREE.CubeGeometry(200, 100, 50, 4, 4, 4);
             var material = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
             var mesh = new THREE.Mesh(geometry, material);
             mesh.position.set(0, 0, 0);
             scene.add(mesh);
 
-            var geometry2 = new THREE.CubeGeometry(200, 100, 50, 4, 4);
-            var material2 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
-            var mesh2 = new THREE.Mesh(geometry2, material2);
-            mesh2.position.set(-300, 0, 0);
-            scene.add(mesh2);
+            // var geometry2 = new THREE.CubeGeometry(200, 100, 50, 4, 4);
+            // var material2 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+            // var mesh2 = new THREE.Mesh(geometry2, material2);
+            // mesh2.position.set(-300, 0, 0);
+            // scene.add(mesh2);
 
-            var geometry3 = new THREE.CubeGeometry(200, 100, 50, 4, 4);
-            var material3 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
-            var mesh3 = new THREE.Mesh(geometry3, material3);
-            mesh3.position.set(0, -150, 0);
-            scene.add(mesh3);
+            // var geometry3 = new THREE.CubeGeometry(200, 100, 50, 4, 4);
+            // var material3 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+            // var mesh3 = new THREE.Mesh(geometry3, material3);
+            // mesh3.position.set(0, -150, 0);
+            // scene.add(mesh3);
 
-            var mesh4 = new THREE.Mesh(geometry3, material3);
-            mesh4.position.set(0, 150, 0);
-            scene.add(mesh4);
+            // var mesh4 = new THREE.Mesh(geometry3, material3);
+            // mesh4.position.set(0, 150, 0);
+            // scene.add(mesh4);
 
-            var mesh5 = new THREE.Mesh(geometry3, material3);
-            mesh5.position.set(300, 0, 0);
-            scene.add(mesh5);
+            // var mesh5 = new THREE.Mesh(geometry3, material3);
+            // mesh5.position.set(300, 0, 0);
+            // scene.add(mesh5);
 
-            var mesh6 = new THREE.Mesh(geometry3, material3);
-            mesh6.position.set(0, 0, -100);
-            scene.add(mesh6);
+            // var mesh6 = new THREE.Mesh(geometry3, material3);
+            // mesh6.position.set(0, 0, -100);
+            // scene.add(mesh6);
 
         }
         // A end
