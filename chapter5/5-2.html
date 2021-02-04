@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three框架</title>
+    <script src="../three.js"></script>
+    <style type="text/css">
+        div#canvas-frame {
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: 600px;
+            background-color: #EEEEEE;
+        }
+    </style>
+    <script>
+        var renderer;
+        function initThree() {
+            width = document.getElementById('canvas-frame').clientWidth;
+            height = document.getElementById('canvas-frame').clientHeight;
+            renderer = new THREE.WebGLRenderer({
+                antialias: true
+            });
+            renderer.setSize(width, height);
+            document.getElementById('canvas-frame').appendChild(renderer.domElement);
+            renderer.setClearColor(0xFFFFFF, 1.0);
+        }
+
+        var camera;
+        function initCamera() {
+            camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+            camera.position.x = 600;
+            camera.position.y = 0;
+            camera.position.z = 600;
+            camera.up.x = 0;
+            camera.up.y = 1;
+            camera.up.z = 0;
+            camera.lookAt(0, 0, 0);
+        }
+
+        var scene;
+        function initScene() {
+            scene = new THREE.Scene();
+        }
+
+        var light;
+        function initLight() {
+            // A start
+            light = new THREE.AmbientLight(0xFFFFFF);
+            light.position.set(100, 100, 200);
+            scene.add(light);
+            // A end
+
+        }
+
+        var cube;
+        function initObject() {
+            var geometry = new THREE.CubeGeometry(200, 100, 50, 4, 4);
+            // 环境光就是在场景中无处不在的光，它对物体的影响是均匀的，也就是无论你从物体的那个角度观察，物体的颜色都是一样的，这就是伟大的环境光。
+            // 你可以把环境光放在任何一个位置，它的光线是不会衰减的，是永恒的某个强度的一种光源。
+            // B start
+            // 如果是0x000000，黑色会吸收任何光，还是黑色，
+            var material = new THREE.MeshLambertMaterial({ color: 0xDC143C });
+            // B end
+            var mesh = new THREE.Mesh(geometry, material);
+            mesh.position = new THREE.Vector3(0, 0, 0);
+            scene.add(mesh);
+        }
+
+        function threeStart() {
+            initThree();
+            initCamera();
+            initScene();
+            initLight();
+            initObject();
+            renderer.clear();
+            renderer.render(scene, camera);
+        }
+
+    </script>
+</head>
+
+<body onload="threeStart();">
+    <div id="canvas-frame"></div>
+</body>
+
+</html>
